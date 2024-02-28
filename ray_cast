@@ -1,0 +1,27 @@
+# Define the function
+def is_point_within_polygon(x, y, polygon):
+    n = len(polygon)
+    odd_nodes = False
+    j = n - 1
+    for i in range(n):
+        xi, yi = polygon[i]
+        xj, yj = polygon[j]
+        if (yi < y and yj >= y) or (yj < y and yi >= y):
+            if xi + (y - yi) / (yj - yi) * (xj - xi) < x:
+                odd_nodes = not odd_nodes
+        j = i
+    return odd_nodes
+
+# Define a polygon (list of vertices)
+polygon = [(1, 1), (1, 4), (4, 4), (4, 1)]
+
+# Test points
+test_points = [(2, 2), (3, 3), (0, 0), (5, 5)]
+
+# Check if each test point is within the polygon
+for point in test_points:
+    x, y = point
+    if is_point_within_polygon(x, y, polygon):
+        print(f"Point {point} is within the polygon.")
+    else:
+        print(f"Point {point} is outside the polygon.")
