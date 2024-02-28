@@ -1,0 +1,11 @@
+from math import radians, sin, cos, acos, degrees
+
+def geodesic_distance(lat1, long1, lat2, long2):
+    lat1, long1, lat2, long2 = map(radians, [lat1, long1, lat2, long2])
+    long_difference = abs(long2 - long1)  # Corrected variable names
+    distance = degrees(acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(long_difference))) * 60
+    return round(distance, 4)
+
+# Example usage:
+distance = geodesic_distance(52.2296756, 21.0122287, 48.8566, 2.3522)
+print("Geodesic distance:", distance, "nautical miles")
